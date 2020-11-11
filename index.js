@@ -10,6 +10,10 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html')
 })
 
+app.get('/redirect', (req, res) => {
+    res.redirect('/');
+})
+
 app.post('/auth', (req, res) => {
     var username = req.body.username
     var password = req.body.password
