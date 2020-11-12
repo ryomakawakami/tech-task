@@ -7,12 +7,12 @@ npm install
 
 Run server
 ```
-node index.js
+node app.js
 ```
 
 Run server with automatic reloading after edits
 ```
-nodemon index.js
+nodemon app.js
 ```
 
 -----------------------------
