@@ -5,6 +5,7 @@ const port = 3000
 
 app.listen(port, () => console.log('Server listening on port 3000'))
 app.use(bodyParser.urlencoded({extended: false}))
+app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html')
@@ -21,14 +22,17 @@ app.post('/auth', (req, res) => {
     // Handle login logic
     switch (login(username, password)) {
         case 0:
+            res.write('<link rel="stylesheet" type="text/css" href="style.css">')
             res.write('<p>Hello ' + username + '</p>')
             res.end('<a href="/">Logout</a>')
             break;
         case 1:
+            res.write('<link rel="stylesheet" type="text/css" href="style.css">')
             res.write('<p>Wrong password</p>')
             res.end('<a href="/">Go back</a>')
             break;
         case 2:
+            res.write('<link rel="stylesheet" type="text/css" href="style.css">')
             res.write('<p>User doesn\'t exist</p>')
             res.end('<a href="/">Go back</a>')
             break;

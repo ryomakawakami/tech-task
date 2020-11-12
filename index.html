@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta content="text/html" charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <title>Login page</title>
 </head>
 <body>
-    <form action="/auth" method="POST">
-        <label for="username">Username</label>
-        <input type="text" name="username" required>
+    <div class="login">
+        <h2>User Login</h2>
+        <form action="/auth" method="POST">
+            <div class="field">
+                <label for="username">Username</label>
+                <input type="text" name="username" required>
+            </div>
 
-        <label for="password">Password</label>
-        <!-- <input type="password" name="password" required> -->
-        <input type="text" name="password" required>
+            <div class="field">
+                <label for="password">Password</label>
+                <!-- <input type="password" name="password" required> -->
+                <input type="text" name="password" required>
+            </div>
 
-        <button type="submit">Login</button>
-    </form>
+            <button type="submit">Login</button>
+        </form>
+    </div>
 </body>
 </html>
