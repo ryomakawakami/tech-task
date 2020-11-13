@@ -1,18 +1,18 @@
 const loginHTML = {
-  header: '<!DOCTYPE html>' +
-    '<html lang="en">' +
-    '<head>' +
-    ' <meta charset="UTF-8">' +
-    ' <link rel="stylesheet" type="text/css" href="css/style.css">' +
-    ' <title>Login: Result</title>' +
-    '</head>' +
-    '<body>',
-  footer: '</body>' +
-    '</html>',
+  header: '<!DOCTYPE html>\n' +
+    '<html lang="en">\n' +
+    '<head>\n' +
+    ' <meta charset="UTF-8">\n' +
+    ' <link rel="stylesheet" type="text/css" href="css/style.css">\n' +
+    ' <title>Login: Result</title>\n' +
+    '</head>\n' +
+    '<body>\n',
+  footer: '</body>\n' +
+    '</html>\n',
   button: (buttontxt) => {
-    return '<form action="/" method="get">' +
-    ' <button type="submit">' + buttontxt + '</button>' +
-    '</form>';
+    return '<form action="/" method="get">\n' +
+    ' <button type="submit">' + buttontxt + '</button>\n' +
+    '</form>\n';
   }
 };
 

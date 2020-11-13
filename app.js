@@ -37,15 +37,15 @@ app.post('/auth', (req, res) => {
     res.write(loginHTML.header);
     switch (login(username, password)) {
         case 0:
-            res.write('<p>Hello ' + username + '</p>');
+            res.write('<p>Hello ' + username + '</p>\n');
             res.write(loginHTML.button('Logout'));
             break;
         case 1:
-            res.write('<p>Wrong password</p>');
+            res.write('<p>Wrong password</p>\n');
             res.write(loginHTML.button('Go Back'));
             break;
         case 2:
-            res.write('<p>User doesn\'t exist</p>');
+            res.write('<p>User doesn\'t exist</p>\n');
             res.write(loginHTML.button('Go Back'));
             break;
     }
