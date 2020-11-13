@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 /*
  * Rount Handling
  */
-app.get('/homepage', (req, res) => res.redirect('/'));
+app.get('/home', (req, res) => res.redirect('/'));
 
 app.get('/example', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'example.html'))
