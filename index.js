@@ -62,7 +62,8 @@ function login(username, password) {
   var users = {
     'oh': 'io',
     'marco': 'polo',
-    'hello': 'world'
+    'hello': 'world',
+    'kermit': 'frog'
   }
 
   if (username in users) {
