@@ -1,59 +1,77 @@
-const bodyParser = require('body-parser')
-const express = require('express')
-const app = express()
-const port = 3000
+const ejs = require('ejs')
 
-app.listen(port, () => console.log('Server listening on port 3000'))
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(express.static(__dirname + '/public'));
+const { parse } = require('querystring')
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html')
-})
+const fs = require('fs')
+const path = require('path')
 
-app.get('/redirect', (req, res) => {
-    res.redirect('/');
-})
-
-app.post('/auth', (req, res) => {
-    var username = req.body.username
-    var password = req.body.password
-
-    // Handle login logic
-    switch (login(username, password)) {
-        case 0:
-            res.write('<link rel="stylesheet" type="text/css" href="style.css">')
-            res.write('<p>Hello ' + username + '</p>')
-            res.end('<a href="/">Logout</a>')
-            break;
-        case 1:
-            res.write('<link rel="stylesheet" type="text/css" href="style.css">')
-            res.write('<p>Wrong password</p>')
-            res.end('<a href="/">Go back</a>')
-            break;
-        case 2:
-            res.write('<link rel="stylesheet" type="text/css" href="style.css">')
-            res.write('<p>User doesn\'t exist</p>')
-            res.end('<a href="/">Go back</a>')
-            break;
+const http = require('http')
+const server = http.createServer((req, res) => {
+  // Handle GET request
+  if (req.method === 'GET') {
+    switch (req.url) {
+      case '/style.css':
+        serveFile(res, path.join(__dirname, 'style.css'), 'text/css')
+      case '/example':
+        serveFile(res, path.join(__dirname, 'example.html'))
+        break
+      default:
+        serveFile(res, path.join(__dirname, 'index.html'))
+        break
     }
-})
+  }
+
+  // Handle POST request
+  else if (req.method === 'POST') {
+    // Acquire data from POST
+    var body = ''
+    req.on('data', chunk => {
+      body += chunk.toString()
+    })
+
+    // Parse data
+    req.on('end', () => {
+      // Get arguments from POST
+      console.log(body)
+      var user = parse(body)
+
+      // Customize content for user (no error handling)
+      var content = fs.readFileSync(path.join(__dirname, 'output.ejs'), 'utf-8')
+      var status = login(user.username, user.password)
+      res.end(ejs.render(content, {status: status, username: user.username}))
+    })
+  }
+}).listen(3000)
+
+/********************/
+/* Helper functions */
+/********************/
+
+// Serves file at pathToFile to response
+function serveFile(res, pathToFile, contentType = 'text/html') {
+  fs.readFile(pathToFile, (error, data) => {
+    if (data) {
+      res.writeHead(200, {'Content-Type': contentType})
+      res.end(data)
+    }
+  })
+}
 
 // 0: success, 1: wrong password, 2: user doesn't exist
 function login(username, password) {
-    var users = {
-        'oh': 'io',
-        'marco': 'polo',
-        'hello': 'world'
-    }
+  var users = {
+    'oh': 'io',
+    'marco': 'polo',
+    'hello': 'world'
+  }
 
-    if (username in users) {
-        if (users[username] == password) {
-            return 0;
-        } else {
-            return 1;
-        }
+  if (username in users) {
+    if (users[username] == password) {
+      return 0;
     } else {
-        return 2;
+      return 1;
     }
+  } else {
+    return 2;
+  }
 }

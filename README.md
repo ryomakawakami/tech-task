@@ -1,6 +1,6 @@
 # tech-task
 
-Install modules
+Install modules (if using ejs)
 ```
 npm install
 ```
@@ -17,31 +17,17 @@ nodemon index.js
 
 -----------------------------
 
-Starts server on port specified
+Starts server on port specified. Callback function handles all user requests.
 ```
-app.listen(port, () => console.log('Server listening on port 3000'))
-```
-
-Handles GET by sending index.html
-```
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html')
-})
+http.createServer((req, res) => callback function).listen(port)
 ```
 
-Handles GET by redirection to /
-```
-app.get('/redirect', (req, res) => {
-    res.redirect('/');
-})
-```
+req.method is either 'GET' or 'POST' (in our case)
 
-Handles POST by getting variables from body
-```
-app.post('/auth', (req, res) => {
-    var username = req.body.username
-    var password = req.body.password
+We can get what the URL is with req.url
 
-    // Some logic
-}
-```
+Can serve stylesheet because a link tag does a get request for the item specified. We can handle the request by checking for req.url==='whatever.css'.
+
+-----------------------------
+
+By the way, our package.json is a mess.

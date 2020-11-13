@@ -53,7 +53,7 @@ h2 {
     transition: 0.5s;
 }
 
-.login button {
+button {
     display: block;
     cursor: pointer;
     transition: all 0.2s;
@@ -68,6 +68,6 @@ h2 {
     font-size: 16px;
 }
 
-.login button:hover {
+button:hover {
     background-color: green;
   }
