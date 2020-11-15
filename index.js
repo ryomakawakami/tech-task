@@ -11,7 +11,7 @@ const server = http.createServer((req, res) => {
   if (req.method === 'GET') {
     switch (req.url) {
       case '/style.css':
-        serveFile(res, path.join(__dirname, 'style.css'), 'text/css')
+        serveFile(res, path.join(__dirname, 'style.css'))
         break
       default:
         serveFile(res, path.join(__dirname, 'index.html'))
@@ -30,8 +30,8 @@ const server = http.createServer((req, res) => {
     // Parse data
     req.on('end', () => {
       // Get arguments from POST
-      console.log(body)
       var user = parse(body)
+      console.log(user)
 
       // Customize content for user (no error handling)
       var content = fs.readFileSync(path.join(__dirname, 'output.ejs'), 'utf-8')
@@ -46,13 +46,9 @@ const server = http.createServer((req, res) => {
 /********************/
 
 // Serves file at pathToFile to response
-function serveFile(res, pathToFile, contentType = 'text/html') {
-  fs.readFile(pathToFile, (error, data) => {
-    if (data) {
-      res.writeHead(200, {'Content-Type': contentType})
-      res.end(data)
-    }
-  })
+function serveFile(res, pathToFile) {
+  res.writeHead(200)
+  fs.createReadStream(pathToFile).pipe(res)
 }
 
 // 0: success, 1: wrong password, 2: user doesn't exist
@@ -65,7 +61,7 @@ function login(username, password) {
   }
 
   if (username in users) {
-    if (users[username] === password) {
+    if (users[username] == password) {
       return 0;
     } else {
       return 1;
