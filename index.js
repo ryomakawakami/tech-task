@@ -12,8 +12,6 @@ const server = http.createServer((req, res) => {
     switch (req.url) {
       case '/style.css':
         serveFile(res, path.join(__dirname, 'style.css'), 'text/css')
-      case '/example':
-        serveFile(res, path.join(__dirname, 'example.html'))
         break
       default:
         serveFile(res, path.join(__dirname, 'index.html'))
@@ -67,7 +65,7 @@ function login(username, password) {
   }
 
   if (username in users) {
-    if (users[username] == password) {
+    if (users[username] === password) {
       return 0;
     } else {
       return 1;
