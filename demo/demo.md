@@ -18,9 +18,7 @@ const server = http.createServer((req, res) => {
   if (req.method === 'GET') {
     switch (req.url) {
       case '/style.css':
-        serveFile(res, path.join(__dirname, 'style.css'), 'text/css')
-      case '/example':
-        serveFile(res, path.join(__dirname, 'example.html'))
+        serveFile(res, path.join(__dirname, 'style.css'))
         break
       default:
         serveFile(res, path.join(__dirname, 'index.html'))
