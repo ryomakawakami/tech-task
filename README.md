@@ -1,16 +1,15 @@
 # tech-task
 
-Install modules (if using ejs)
+1. Unzip the zip file
+
+2. Install modules
 ```
 npm install
 ```
 
-Run server
+3. Run server
 ```
 node index.js
 ```
 
-Run server with automatic reloading after edits
-```
-nodemon index.js
-```
+4. Go to localhost:3000 to see
